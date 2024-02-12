@@ -1,0 +1,91 @@
+HDC3020 Temperature+Humidity Sensor
+===================================
+
+.. seo::
+    :description: Instructions for setting up HDC3020 temperature and humidity sensors.
+    :image: hdc3020.jpg
+    :keywords: HDC3020
+
+The HDC3020 Temperature+Humidity sensor allows you to use your HDC3020
+(`datasheet <http://www.ti.com/lit/ds/symlink/hdc3020.pdf>`__) sensors with
+ESPHome. The :ref:`I²C Bus <i2c>` is
+required to be set up in your configuration for this sensor to work.
+
+.. figure:: images/hdc3020-full.jpg
+    :align: center
+    :target: `Adafruit`_
+    :width: 50.0%
+
+    HDC3020 Temperature & Humidity Sensor. 
+
+
+.. figure:: images/temperature-humidity.png
+    :align: center
+    :width: 80.0%
+
+.. code-block:: yaml
+
+    # Example configuration entry
+    sensor:
+      - platform: hdc3020
+        temperature:
+          name: "Living Room Temperature"
+        humidity:
+          name: "Living Room Humidity"
+        update_interval: 60s
+
+Configuration variables:
+------------------------
+
+- **temperature** (**Required**): The information for the temperature sensor.
+
+  - **name** (**Required**, string): The name for the temperature sensor.
+  - **id** (*Optional*, :ref:`config-id`): Set the ID of this sensor for use in lambdas.
+  - All other options from :ref:`Sensor <config-sensor>`.
+
+- **humidity** (**Required**): The information for the humidity sensor
+
+  - **name** (**Required**, string): The name for the humidity sensor.
+  - **id** (*Optional*, :ref:`config-id`): Set the ID of this sensor for use in lambdas.
+  - All other options from :ref:`Sensor <config-sensor>`.
+
+- **update_interval** (*Optional*, :ref:`config-time`): The interval to check the sensor. Defaults to ``60s``.
+
+
+Currently, the platform doesn't support activating the built-in heater,
+as it seems to only be rarely of use. If you need it, please open an
+issue.
+
+Notes
+--------
+
+This library does not include all functionalities of HDC3020. It is derived from both the arduino HDC3020 library of Sander Schinkelshoek, itself derived from code of Josh Wyatt (Texas Intruments Inc), and from 
+the HDC1080 library of esphome. 
+
+.. code-block:: yaml
+
+    # Example configuration entry
+    sensor:
+      - platform: hdc3020
+        temperature:
+          name: "Outside Temperature"
+        humidity:
+          name: "Outside Humidity"
+        address: 0x44
+        update_interval: 60s
+
+
+See Also
+--------
+
+- :ref:`sensor-filters`
+- :doc:`absolute_humidity`
+- :doc:`dht`
+- :doc:`dht12`
+- :doc:`htu21d`
+- :doc:`sht3xd`
+- :doc:`HDC1080`
+- :apiref:`hdc3020/hdc3020.h`
+- `HDC3020 Library <https://github.com/SndrSchnklshk/HDC302x>`__ by `Sander Schinkelshoek`__
+- `HDC3020 datasheet <https://www.ti.com/lit/ds/symlink/hdc3020.pdf>`
+- :ghedit:`Edit`
